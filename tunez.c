@@ -30,7 +30,7 @@ For example, you can put your struct definition and your linked list headers in 
 You may also want to set up a .h/.c set for the playlist specific functions and a separate set for the linked list functions.
 A makefile that will compile all the parts of your code and generate a single executable program
 */
-typedef struct song_node{ 
+struct song_node{ 
   char name[256];
   char artist[256];
   struct song_node *next;
@@ -42,12 +42,10 @@ struct song_node * free_list(struct song_node *n );
 
 
 void print_list(struct song_node *n ) {
-  printf("[ ");
   while(n) {
-    printf("song: %s, artist: %s", n->name, n->artist);
+    printf("song: %s, artist: %s\n", n->name, n->artist);
     n = n->next;
   }
-  printf("]\n");
 }
 
 
@@ -82,7 +80,31 @@ struct song_node * search_list(struct song_node * n, char * name){
 }
 
 int main(){
+  struct song_node *a = (struct song_node *)malloc(sizeof(struct song_node));
+  strcpy(a->name, "chasing ghosts");
+  strcpy(a->artist, "atc");
+  struct song_node *b = (struct song_node *)malloc(sizeof(struct song_node));
+  strcpy(b->name, "runaway");
+  strcpy(b->artist, "btc");
+  struct song_node *c = (struct song_node *)malloc(sizeof(struct song_node));
+  strcpy(c->name, "hello");
+  strcpy(c->artist, "cdele");
+  struct song_node *d = (struct song_node *)malloc(sizeof(struct song_node));
+  struct song_node *addon = (struct song_node *)malloc(sizeof(struct song_node));
+  strcpy(d->name, "i like cows");
+  strcpy(d->artist, "damy");
 
+  a->next = b;
+  b->next = c;
+  c->next = d;
+  d->next = NULL;
+
+  print_list(a);
+  char name[256] = "hurhurhur";
+  char artist[256] = "teehee";
+  insert_front(addon, name, artist);
+  print_list(addon);
+  printf("%d", free_list(addon));
 }
 
 
