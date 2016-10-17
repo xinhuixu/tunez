@@ -1,17 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "tunez.h"
 #include <string.h>
 
 /*
 You should start by making your linked lists work with the following functionality:
-insert nodes at the front
-insert nodes in order
+insert song_nodes at the front
+insert song_nodes in order
 print the entire list
 find and return a pointer to an individual song based on song name
 find and return a pointer to the first song of an artist based on artist name
 Return a pointer to random element in the list.
-remove a single node from the list
+remove a single song_node from the list
 free the entire list
 
 Then create your array of linked lists for the full program and have the following functions:
@@ -31,32 +30,37 @@ For example, you can put your struct definition and your linked list headers in 
 You may also want to set up a .h/.c set for the playlist specific functions and a separate set for the linked list functions.
 A makefile that will compile all the parts of your code and generate a single executable program
 */
+typedef struct song_node{ 
+  char name[256];
+  char artist[256];
+  struct song_node *next;
+} song_node;
+
+void print_list(struct song_node * n);
+struct song_node * insert_front(struct song_node *n, char name[256], char artist[256]);
+struct song_node * free_list(struct song_node *n );
 
 
-
-
-void print_list( struct node *n ) {
-
+void print_list(struct song_node *n ) {
   printf("[ ");
-  
   while(n) {
-    printf("The song name is: %s, artist is %s", n->name, n->artist);
+    printf("song: %s, artist: %s", n->name, n->artist);
     n = n->next;
   }
   printf("]\n");
 }
 
 
-struct node * insert_front(struct node *n, char name[256], char artist[256]); {
-  struct node *new = (struct node *)malloc(sizeof(struct node));
+struct song_node * insert_front(struct song_node *n, char name[256], char artist[256]){
+  struct song_node *new = (struct song_node *)malloc(sizeof(struct song_node));
   new->next = n;
-  new->name = d;
-  new->artist = artist;
+  strcpy(new->name, name);
+  strcpy(new->artist,artist);
   return new;
 }
 
-struct node * free_list(struct node *n) {
-  struct node *f = n;
+struct song_node * free_list(struct song_node *n) {
+  struct song_node *f = n;
   while ( n ) {
     n = n->next;
     free(f);
@@ -67,13 +71,18 @@ struct node * free_list(struct node *n) {
 
 //find and return a pointer to an individual song based on song name
 
-struct node * search_list(struct node * n, char * name){
+struct song_node * search_list(struct song_node * n, char * name){
   while (n){
-    if (! strcmp(*name, n->i))
+    if (! strcmp(name, n->name))
       n = n->next;
-    return n;
+    else
+      return n;
   }
   return n;
+}
+
+int main(){
+
 }
 
 
