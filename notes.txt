@@ -1,0 +1,47 @@
+# xinhui's temp notes
+
+#
+	Used to provide preprocessor instructions
+	Handled before the compiler really kicks in
+
+	#include <LIBRARY> | "LIBRARY"
+	#define <NAME> <VALUE>
+		does NOT make a variable, NOT a constant
+
+		#define STR "hello\n"
+		printf(STR); // usually doesn't work but
+			     STR IS REPLACED
+		macros:
+		#define SQUARE(x) x * x
+		int y = SQUARE(9); // int y = 9 * 9;
+
+how to fix include conflicts?
+    #ifndef <IDENTIFIER>
+    <any CODE>
+    #endif
+    
+---tunez.h----
+#ifndef LINK_LIST_H
+#define LINK_LIST_H
+
+typedef struct n {
+	...;
+	struct n *next;
+} song_node;
+
+void print_list( song_node * );
+
+#endif
+
+---Random Numbers---
+if don't do anything, same random numbers every run
+srand(1); // seed random num gen, 1 is default number-- still same rands
+fix?:
+	#include <time.h>
+	srand( time(NULL) );
+	printf(.., rand() );
+// will get same rand if ran in same second
+REAL fix:
+     sranddev(); // seed the rand gen with a rand from /dev/random
+     
+
