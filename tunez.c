@@ -42,7 +42,7 @@ struct song_node * free_list(struct song_node *n );
 
 
 void print_list(struct song_node *n ) {
-  while(n) {
+  while(n->next) {
     printf("song: %s, artist: %s\n", n->name, n->artist);
     n = n->next;
   }
@@ -51,9 +51,9 @@ void print_list(struct song_node *n ) {
 
 struct song_node * insert_front(struct song_node *n, char name[256], char artist[256]){
   struct song_node *new = (struct song_node *)malloc(sizeof(struct song_node));
-  new->next = n;
   strcpy(new->name, name);
-  strcpy(new->artist,artist);
+  strcpy(new->artist, artist);
+  new->next = n;
   return new;
 }
 
@@ -79,6 +79,10 @@ struct song_node * search_list(struct song_node * n, char * name){
   return n;
 }
 
+struct song_node * print_song(struct song_node *n){
+  printf("song: %s\n", n->name);
+}
+
 int main(){
   struct song_node *a = (struct song_node *)malloc(sizeof(struct song_node));
   strcpy(a->name, "chasing ghosts");
@@ -91,20 +95,23 @@ int main(){
   strcpy(c->artist, "cdele");
   struct song_node *d = (struct song_node *)malloc(sizeof(struct song_node));
   struct song_node *addon = (struct song_node *)malloc(sizeof(struct song_node));
-  strcpy(d->name, "i like cows");
-  strcpy(d->artist, "damy");
 
   a->next = b;
   b->next = c;
   c->next = d;
   d->next = NULL;
 
+  printf("testing print list\n\n");
   print_list(a);
+  
+  printf("testing insert front\n");
   char name[256] = "hurhurhur";
   char artist[256] = "teehee";
-  insert_front(addon, name, artist);
+  addon = insert_front(a, name, artist);
+  printf("testing free\n");
   print_list(addon);
-  printf("%d", free_list(addon));
+  
+  printf("%d\n", free_list(addon));
 }
 
 
