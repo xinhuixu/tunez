@@ -1,7 +1,7 @@
 GCC = gcc -g
 
 all: tunez.o
-	$(GCC) list.o main.o -o tunetest
+	$(GCC) tunez.o -o tunetest
 
 tunez.o: tunez.c tunez.h
 	$(GCC) -c tunez.c
@@ -11,4 +11,4 @@ clean:
 	rm *~
 
 run: all
-	./tunetest.out
+	./tunetest
