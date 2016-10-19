@@ -28,8 +28,6 @@ song_node * free_list(song_node *n) {
   return n;
 }
 
-//find and return a pointer to an individual song based on song name
-
 song_node * search_list( song_node * n, char * name ){
   while (n){
     if (! strcmp(name, n->name))
@@ -44,34 +42,33 @@ song_node * print_song( song_node *n ){
   printf("song: %s\n", n->name);
 }
 
+
+// ------------------------------------------ //
+
+
 int main(){
   printf("------RUN------\n");
+  
   song_node *a = ( song_node * )malloc(sizeof( song_node ));
   strcpy(a->name, "chasing ghosts");
   strcpy(a->artist, "atc");
-  song_node *b = ( song_node * )malloc(sizeof( song_node ));
-  strcpy(b->name, "runaway");
-  strcpy(b->artist, "btc");
-  song_node *c = ( song_node * )malloc(sizeof( song_node ));
-  strcpy(c->name, "hello");
-  strcpy(c->artist, "cdele");
-  song_node *d = ( song_node * )malloc(sizeof( song_node ));
-   song_node *addon = ( song_node * )malloc(sizeof( song_node ));
-
-  a->next = b;
-  b->next = c;
-  c->next = d;
-  d->next = NULL;
-
-  printf("testing print list\n");
+  song_node *a2 = ( song_node * )malloc(sizeof( song_node ));
+  strcpy(a2->name, "hello");
+  strcpy(a2->artist, "adele");
+  a->next = a2;
+  
+  printf("print_list\n");
   print_list(a);
   
-  printf("testing insert front\n");
+  song_node *e = ( song_node * )malloc(sizeof( song_node ));
+  
+  printf("insert_front\n");
   char name[256] = "hurhurhur";
   char artist[256] = "teehee";
-  addon = insert_front(a, name, artist);
-  print_list(addon);
-  free_list(addon);
+  e = insert_front(a, name, artist);
+  print_list(e);
+  
+  free_list(e);
 }
 
 
