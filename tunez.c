@@ -30,10 +30,10 @@ song_node * free_list(song_node *n) {
 
 song_node * search_list( song_node * n, char * name ){
   while (n){
-    if (! strcmp(name, n->name))
+    if (strcmp(name, n->name)) {
       printf("%s\n", n->name);
       n = n->next;
-    else{
+    } else {
       return n;
     }
   }
