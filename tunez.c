@@ -28,10 +28,10 @@ song_node * free_list(song_node *n) {
   return n;
 }
 
-song_node * search_list( song_node * n, char * name ){
+// helper for search_song
+song_node * search_in_node( song_node * n, char * name ){
   while (n){
     if (strcmp(name, n->name)) {
-      printf("%s\n", n->name);
       n = n->next;
     } else {
       return n;
@@ -40,23 +40,54 @@ song_node * search_list( song_node * n, char * name ){
   return n;
 }
 
-song_node * print_song( song_node *n ){
-  printf("song: %s\n", n->name);
+// find pointer to song based on song name
+song_node * search_song( song_node p[26], char * name ){  
+  return 0;
 }
 
+// find first song of artist based on artist name
+song_node * first_song_of( song_node n, char * artist){
+  int i = 0;
+  for ( i = 0; i < 26; i++ ){
+    
+  }
+  return 0;
+}
+
+// find artist
+song_node * search_artist( song_node p[26], char * artist ){
+ 
+  return 0;
+}
+
+// helper of add_song, add new song_node to playlist
+void add_song_node(song_node p[26], song_node * n) {
+  
+}
+
+// create new song_node, pass to add_song_node
+void add_song(char * name, char * artist){  
+  song_node *n = ( song_node * )malloc(sizeof( song_node ));
+  strcpy(n->name, name);
+  strcpy(n->artist, artist);
+  add_song_node(n);
+  printf("new song %s by %s added\n",name,artist);
+}
+
+
+song_node * print_song( song_node *n ){
+  printf("song: %s |", n->name);
+  printf("artist: %s\n",n->artist);
+}
 
 // ------------------------------------------ //
 
 
 int main(){
   printf("------RUN------\n");
+  song_node *playlist[26];
+  printf("playlist[26]\n");
   
-  song_node *a = ( song_node * )malloc(sizeof( song_node ));
-  strcpy(a->name, "chasing ghosts");
-  strcpy(a->artist, "atc");
-  song_node *a2 = ( song_node * )malloc(sizeof( song_node ));
-  strcpy(a2->name, "hello");
-  strcpy(a2->artist, "adele");
   a->next = a2;
   
   printf("print_list\n");
@@ -70,8 +101,7 @@ int main(){
   a0 = insert_front(a, name, artist);
   print_list(a0);
   char test[256] = "hello";
-  printf("search list test: %s\n", search_list(a0, test));
-  
+   
   free_list(a0);
 
   printf("------RUN END------\n");
