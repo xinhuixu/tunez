@@ -60,15 +60,17 @@ int main(){
   printf("print_list\n");
   print_list(a);
   
-  song_node *e = ( song_node * )malloc(sizeof( song_node ));
+  song_node *a0 = ( song_node * )malloc(sizeof( song_node ));
   
   printf("insert_front\n");
-  char name[256] = "hurhurhur";
-  char artist[256] = "teehee";
-  e = insert_front(a, name, artist);
-  print_list(e);
+  char name[256] = "test song a";
+  char artist[256] = "a";
+  a0 = insert_front(a, name, artist);
+  print_list(a0);
   
-  free_list(e);
+  free_list(a0);
+
+  printf("------RUN END------\n");
 }
 
 
