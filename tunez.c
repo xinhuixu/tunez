@@ -31,9 +31,11 @@ song_node * free_list(song_node *n) {
 song_node * search_list( song_node * n, char * name ){
   while (n){
     if (! strcmp(name, n->name))
+      printf("%s\n", n->name);
       n = n->next;
-    else
+    else{
       return n;
+    }
   }
   return n;
 }
@@ -67,6 +69,8 @@ int main(){
   char artist[256] = "a";
   a0 = insert_front(a, name, artist);
   print_list(a0);
+  char test[256] = "hello";
+  printf("search list test: %s\n", search_list(a0, test));
   
   free_list(a0);
 
